@@ -16,7 +16,7 @@ export const TopicArticles = () => {
                 setArticles(sortedArticles);
             })
             .catch(error => console.error("Error fetching articles:", error));
-    }, []);
+    }, [topic_name]);
 
     return (
         <div>
