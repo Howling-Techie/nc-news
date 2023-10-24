@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {getTopics} from "../services/API.js";
 
 export const NavBar = () => {
     const [topics, setTopics] = useState([]);
@@ -7,8 +8,7 @@ export const NavBar = () => {
 
     useEffect(() => {
         // Fetch topics from API
-        fetch("https://nc-news-8ccb.onrender.com/api/topics")
-            .then(response => response.json())
+        getTopics()
             .then(data => setTopics(data.topics))
             .catch(error => console.error("Error fetching topics:", error));
     }, []);
