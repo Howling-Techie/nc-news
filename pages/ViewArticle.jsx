@@ -19,7 +19,7 @@ export const ViewArticle = () => {
 
     return (
         <div>
-            {loading && <h3 className="text-l font-bold mb-4">Loading Article...</h3>}
+            {loading && <h1 className="text-l font-bold mb-4">Loading Article...</h1>}
             {!loading &&
              <Article article={article}/>
             }
