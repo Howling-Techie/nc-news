@@ -26,6 +26,7 @@ export const Home = () => {
 
     return (
         <>
+            {loading && <h2 className="text-l font-bold mb-4">Loading Articles...</h2>}
             {!loading && <ArticleRow title={"Latest"} articles={articles.latest} path={`/latest`}
                                      description={"The latest and greatest articles on the site!"}/>}
             {!loading && topics.map((topic) => (

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {ArticleInfo} from "../components/ArticleInfo.jsx";
 import {useParams} from "react-router-dom";
-import {getArticles, getTopics} from "../services/API.js";
+import {getArticlesByTopic, getTopics} from "../services/API.js";
 
 export const TopicArticles = () => {
     const {topic_name} = useParams();
@@ -10,9 +10,9 @@ export const TopicArticles = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getArticles()
+        getArticlesByTopic(topic_name)
             .then(data => {
-                const sortedArticles = data.articles.filter(article => article.topic === topic_name).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                const sortedArticles = data.articles.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setArticles(sortedArticles);
             })
             .then(() => {
@@ -29,7 +29,7 @@ export const TopicArticles = () => {
         <div>
             <h1 className="text-2xl font-bold mb-4">Latest {"\"" + topic_name + "\""} articles</h1>
             <h2 className="text-l mb-4">{topic.description}</h2>
-            {loading && <h2 className="text-l font-bold mb-4">Loading Articles...</h2>}
+            {loading && <h2 className="text-l font-bold mb-4">Loading Topic...</h2>}
             {!loading && articles.map(article => (
                 <ArticleInfo key={article.article_id} article={article}/>
             ))}
