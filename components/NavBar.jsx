@@ -7,7 +7,6 @@ export const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        // Fetch topics from API
         getTopics()
             .then(data => setTopics(data.topics))
             .catch(error => console.error("Error fetching topics:", error));

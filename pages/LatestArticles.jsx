@@ -7,10 +7,8 @@ export const LatestArticles = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch latest articles from API
         getArticles()
             .then(data => {
-                // Sort articles from newest to oldest
                 const sortedArticles = data.articles.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setArticles(sortedArticles);
                 setLoading(false);

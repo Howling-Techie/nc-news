@@ -9,10 +9,8 @@ export const TopicArticles = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch latest articles from API
         getArticles()
             .then(data => {
-                // Sort articles from newest to oldest, filtered by topic
                 const sortedArticles = data.articles.filter(article => article.topic === topic_name).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setArticles(sortedArticles);
                 setLoading(false);
