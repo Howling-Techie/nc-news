@@ -38,6 +38,11 @@ const getArticleById = (articleId) => {
         .then(handleResponse);
 };
 
+const getArticlesByTopic = (topic) => {
+    return fetch(`${BASE_URL}/articles?topic=${topic}`, {headers})
+        .then(handleResponse);
+};
+
 const getCommentsByArticleId = (articleId) => {
     return fetch(`${BASE_URL}/articles/${articleId}/comments`, {headers})
         .then(handleResponse);
@@ -77,6 +82,7 @@ export {
     getUserById,
     getArticles,
     getArticleById,
+    getArticlesByTopic,
     getCommentsByArticleId,
     postTopic,
     postArticle,
