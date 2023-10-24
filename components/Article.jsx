@@ -14,8 +14,8 @@ export const Article = (article) => {
                 <figure className="w-full md:w-1/2">
                     <img src={article_img_url} alt={title} className="w-full h-auto rounded-md"/>
                 </figure>
-                <details className="md:pl-4 flex flex-col justify-center">
-                    <Link to={`/articles/${article_id}`} className="text-2xl font-bold hover:underline">{title}</Link>
+                <section className="md:pl-4 flex flex-col justify-center">
+                    <p className="text-2xl font-bold">{title}</p>
                     <summary className="text-sm hidden md:block py-1">
                         <Link to={`/topics/${topic}`} className="text-gray-700 hover:underline">
                             {topic}
@@ -24,7 +24,7 @@ export const Article = (article) => {
                     <time className="text-gray-700 text-sm mb-2">
                         {formatDate(created_at)} - {author}
                     </time>
-                </details>
+                </section>
             </section>
             <section className="pb-4">
                 {body}
