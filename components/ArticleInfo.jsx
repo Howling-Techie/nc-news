@@ -15,18 +15,18 @@ export const ArticleInfo = ({article}) => {
             </figure>
             <summary className="w-3/4 flex flex-col justify-center">
                 <Link to={`/articles/${article_id}`} className="text-2xl font-bold hover:underline">{title}</Link>
-                <details className="text-sm hidden md:block py-1">
+                <summary className="text-sm hidden md:block py-1">
                     <Link to={`/topics/${topic}`} className="text-gray-700 hover:underline">
                         {topic}
                     </Link>
-                </details>
-                <details className="text-gray-700 text-sm mb-2">
+                </summary>
+                <time className="text-gray-700 text-sm mb-2">
                     {formatDate(created_at)} - {author}
-                </details>
-                <details className="text-sm font-bold  hidden md:block">
+                </time>
+                <summary className="text-sm font-bold  hidden md:block">
                     <span role="img" aria-label="votes"> 👍 {votes} votes</span> |
                     <span role="img" aria-label="comments"> 💬 {comment_count} comments</span>
-                </details>
+                </summary>
             </summary>
         </section>
     );
