@@ -28,8 +28,8 @@ const getUserById = (userId) => {
         .then(handleResponse);
 };
 
-const getArticles = () => {
-    return fetch(`${BASE_URL}/articles`, {headers})
+const getArticles = (limit = 10) => {
+    return fetch(`${BASE_URL}/articles?limit=${limit}`, {headers})
         .then(handleResponse);
 };
 
@@ -38,8 +38,8 @@ const getArticleById = (articleId) => {
         .then(handleResponse);
 };
 
-const getArticlesByTopic = (topic) => {
-    return fetch(`${BASE_URL}/articles?topic=${topic}`, {headers})
+const getArticlesByTopic = (topic, limit = 10) => {
+    return fetch(`${BASE_URL}/articles?topic=${topic}&limit=${limit}`, {headers})
         .then(handleResponse);
 };
 

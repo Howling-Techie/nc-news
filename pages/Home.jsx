@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getArticles, getTopics} from "../services/API.js";
+import {getArticles, getArticlesByTopic, getTopics} from "../services/API.js";
 import {ArticleRow} from "../components/ArticleRow.jsx";
 
 export const Home = () => {
@@ -12,11 +12,12 @@ export const Home = () => {
             const topicData = await getTopics();
             setTopics(topicData.topics);
 
-            const articleData = await getArticles();
+            const articleData = await getArticles(4);
             const sortedArticles = {};
-            sortedArticles.latest = articleData.articles.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 4);
+            sortedArticles.latest = articleData.articles;
             for (const topic of topicData.topics) {
-                sortedArticles[topic.slug] = articleData.articles.filter(article => article.topic === topic.slug).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                const topicArticles = await getArticlesByTopic(topic.slug, 4);
+                sortedArticles[topic.slug] = topicArticles.articles;
             }
             setArticles(sortedArticles);
             setLoading(false);
