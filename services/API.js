@@ -28,13 +28,18 @@ const getUserById = (userId) => {
         .then(handleResponse);
 };
 
-const getArticles = () => {
-    return fetch(`${BASE_URL}/articles`, {headers})
+const getArticles = (limit = 10) => {
+    return fetch(`${BASE_URL}/articles?limit=${limit}`, {headers})
         .then(handleResponse);
 };
 
 const getArticleById = (articleId) => {
     return fetch(`${BASE_URL}/articles/${articleId}`, {headers})
+        .then(handleResponse);
+};
+
+const getArticlesByTopic = (topic, limit = 10) => {
+    return fetch(`${BASE_URL}/articles?topic=${topic}&limit=${limit}`, {headers})
         .then(handleResponse);
 };
 
@@ -77,6 +82,7 @@ export {
     getUserById,
     getArticles,
     getArticleById,
+    getArticlesByTopic,
     getCommentsByArticleId,
     postTopic,
     postArticle,

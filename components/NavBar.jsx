@@ -18,15 +18,18 @@ export const NavBar = () => {
                 <Link to="/" className="text-2xl font-bold">Northcoders News</Link>
             </div>
             <div className="flex space-x-4 justify-center flex-grow">
+                <Link to="/" className="text-black hover:bg-gray-200 p-2 rounded">
+                    Home
+                </Link>
                 <Link to="/latest" className="text-black hover:bg-gray-200 p-2 rounded">
                     Latest
                 </Link>
-                <div className="py-2 rounded"
+                <div className="rounded hover:cursor-pointer"
                      onMouseEnter={() => setIsOpen(true)}
                      onMouseLeave={() => setIsOpen(false)}>
-                    <Link to="/topics" className="text-black hover:bg-gray-200 p-2 rounded">
+                    <div className="text-black hover:bg-gray-200 p-2 rounded">
                         Topics
-                    </Link>
+                    </div>
                     {isOpen && (
                         <div className="absolute bg-white border border-gray-300 py-2 rounded shadow-lg">
                             {topics.map(topic => (
