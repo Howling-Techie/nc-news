@@ -1,12 +1,8 @@
 import {Link} from "react-router-dom";
+import {formatDate} from "../Utils/Utils.jsx";
 
 export const Article = (article) => {
-    const {author, title, article_id, topic, created_at, votes, article_img_url, comment_count, body} = article.article;
-
-    const formatDate = (dateString) => {
-        const options = {year: "numeric", month: "long", day: "numeric"};
-        return new Date(dateString).toLocaleDateString(undefined, options);
-    };
+    const {author, title, topic, created_at, votes, article_img_url, comment_count, body} = article.article;
 
     return (
         <article className="flex flex-col">
@@ -15,7 +11,7 @@ export const Article = (article) => {
                     <img src={article_img_url} alt={title} className="w-full h-auto rounded-md"/>
                 </figure>
                 <section className="md:pl-4 flex flex-col justify-center">
-                    <p className="text-2xl font-bold">{title}</p>
+                    <h1 className="text-2xl font-bold">{title}</h1>
                     <summary className="text-sm hidden md:block py-1">
                         <Link to={`/topics/${topic}`} className="text-gray-700 hover:underline">
                             {topic}
