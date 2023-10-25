@@ -16,15 +16,13 @@ export const Comments = ({article_id}) => {
     }, [article_id]);
 
     return (
-        <section id="comments">
-            <section className="flex flex-col p-4 border rounded-xl mb-4">
-                <h1 className="text-l font-bold pb-4">{comments.length} Comment{comments.length === 1 ? "" : "s"}</h1>
-                {loading && <h2 className="text-m">Loading comments...</h2>}
-                {!loading &&
-                 comments.map((comment) =>
-                     <Comment comment={comment} key={comment.comment_id}/>)
-                }
-            </section>
+        <section id="comments" className="flex flex-col p-4 border rounded-xl mb-4">
+            <h1 className="text-l font-bold pb-4">{comments.length} Comment{comments.length === 1 ? "" : "s"}</h1>
+            {loading && <h2 className="text-m">Loading comments...</h2>}
+            {!loading &&
+             comments.map((comment) =>
+                 <Comment comment={comment} key={comment.comment_id}/>)
+            }
         </section>
     );
 };

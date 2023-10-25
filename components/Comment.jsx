@@ -18,34 +18,44 @@ export const Comment = ({comment}) => {
     }, [author]);
 
     return (
-        <div className="flex p-4 border rounded-xl mb-4">
-            <div className="flex-shrink-0 mr-4">
+        <article className="flex p-4 border rounded-xl mb-4">
+            <figure className="flex-shrink-0 mr-4">
                 <img
                     src={user.avatar_url}
                     alt={user.name}
                     className="w-12 h-12"
                 />
-            </div>
-            <div className="flex-1">
-                {loading && <span className="font-bold">Loading User Info...</span>}
-                {!loading && <><span className="font-bold">{user.name}</span>
-                    <span className="text-gray-500 font-normal italic mb-0">{`   @${user.username}`}</span>
-                </>}
-                <div className="text-xs text-gray-500">{formatDate(created_at, true)}</div>
-                <div className="my-2 text-md font-normal">{body}</div>
-                <div className="items-center inline-flex">
-                    <button aria-label="vote comment down"
-                            className="border-gray-600 border hover:bg-gray-600 hover:border-gray-600 text-red-500 hover:text-gray-50 font-bold py-1 px-2 rounded-l">
-                        <span>-1</span>
+            </figure>
+            <section className="flex-1">
+                {loading && <strong className="font-bold">Loading User Info...</strong>}
+                {!loading && (
+                    <>
+                        <strong className="font-bold">{user.name}</strong>
+                        <span className="text-gray-500 font-normal italic mb-0">{`   @${user.username}`}</span>
+                    </>
+                )}
+                <time className="text-xs text-gray-500 block" dateTime={created_at}>
+                    {formatDate(created_at, true)}
+                </time>
+                <p className="my-2 text-md font-normal">{body}</p>
+                <div className="inline-flex items-center" aria-label="comment votes">
+                    <button
+                        aria-label="vote comment down"
+                        className="border-gray-600 border hover:bg-gray-600 hover:border-gray-600 text-red-500 hover:text-gray-50 font-bold py-1 px-2 rounded-l"
+                    >
+                        -1
                     </button>
-                    <div
-                        className="border-gray-600 border-t border-b text-gray-800 font-semibold py-1 px-6">{votes}</div>
-                    <button aria-label="vote comment up"
-                            className="border-gray-600 border hover:bg-gray-600 hover:border-gray-600 font-bold py-1 px-2 rounded-r text-green-500 hover:text-gray-50">
-                        <span>+1</span>
+                    <div className="border-gray-600 border-t border-b text-gray-800 font-semibold py-1 px-6">
+                        {votes}
+                    </div>
+                    <button
+                        aria-label="vote comment up"
+                        className="border-gray-600 border hover:bg-gray-600 hover:border-gray-600 font-bold py-1 px-2 rounded-r text-green-500 hover:text-gray-50"
+                    >
+                        +1
                     </button>
                 </div>
-            </div>
-        </div>
+            </section>
+        </article>
     );
 };
