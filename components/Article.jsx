@@ -5,21 +5,22 @@ export const Article = (article) => {
     const {author, title, topic, created_at, votes, article_img_url, comment_count, body} = article.article;
 
     return (
-        <article className="flex flex-col">
-            <section className="flex flex-col md:flex-row md:pb-4">
-                <figure className="w-full md:w-1/2">
-                    <img src={article_img_url} alt={title} className="w-full h-auto rounded-md"/>
+        <article className="flex flex-col p-4 mb-4 border rounded-xl">
+            <section className="flex flex-col md:flex-row md:mb-4 border rounded-md">
+                <figure className="w-full md:w-1/3 ">
+                    <img src={article_img_url} alt={title} className="h-full rounded-md object-cover"/>
                 </figure>
-                <section className="md:pl-4 flex flex-col justify-center">
+                <section className="px-4 flex flex-col justify-center ">
+                    <Link to={`/topics/${topic}`} className=" hover:underline">
+                        {topic}
+                    </Link>
                     <h1 className="text-2xl font-bold">{title}</h1>
                     <summary className="text-sm block py-1 text-gray-700">
-                        <time className="text-sm mb-2">
-                            {formatDate(created_at)} - {author}
-                        </time>
+                        By {author}
                         <br/>
-                        <Link to={`/topics/${topic}`} className=" hover:underline">
-                            {topic}
-                        </Link>
+                        <time className="text-sm mb-2">
+                            {formatDate(created_at)}
+                        </time>
                         <br/>
                         <a href="#comments" aria-label="comments"
                            className="hover:underline"> 💬 {comment_count} comments</a>
