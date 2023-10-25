@@ -14,7 +14,7 @@ export const NavBar = () => {
 
     return (
         <nav className="bg-gray-100 p-4 flex justify-between items-center">
-            <div className="flex-grow">
+            <div className="flex flex-grow justify-start">
                 <Link to="/" className="text-2xl font-bold">Northcoders News</Link>
             </div>
             <div className="flex space-x-4 justify-center flex-grow">
@@ -31,7 +31,7 @@ export const NavBar = () => {
                         Topics
                     </div>
                     {isOpen && (
-                        <div className="absolute bg-white border border-gray-300 py-2 rounded shadow-lg">
+                        <div className="absolute bg-white border border-gray-300 py-2 rounded shadow-lg z-10">
                             {topics.map(topic => (
                                 <Link
                                     to={`/topics/${topic.slug}`}
