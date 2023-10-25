@@ -12,22 +12,25 @@ export const Article = (article) => {
                 </figure>
                 <section className="md:pl-4 flex flex-col justify-center">
                     <h1 className="text-2xl font-bold">{title}</h1>
-                    <summary className="text-sm hidden md:block py-1">
-                        <Link to={`/topics/${topic}`} className="text-gray-700 hover:underline">
+                    <summary className="text-sm block py-1 text-gray-700">
+                        <time className="text-sm mb-2">
+                            {formatDate(created_at)} - {author}
+                        </time>
+                        <br/>
+                        <Link to={`/topics/${topic}`} className=" hover:underline">
                             {topic}
                         </Link>
+                        <br/>
+                        <a href="#comments" aria-label="comments"
+                           className="hover:underline"> 💬 {comment_count} comments</a>
                     </summary>
-                    <time className="text-gray-700 text-sm mb-2">
-                        {formatDate(created_at)} - {author}
-                    </time>
                 </section>
             </section>
             <section className="pb-4">
                 {body}
             </section>
-            <section className="text-sm font-semibold">
-                <span role="img" aria-label="votes"> 👍 {votes} votes</span> |
-                <span role="img" aria-label="comments"> 💬 {comment_count} comments</span>
+            <section className="text-sm pb-4">
+                <span aria-label="votes"> 👍 {votes} votes</span>
             </section>
         </article>
     );

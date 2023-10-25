@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getArticleById} from "../services/API.js";
 import {Article} from "../components/Article.jsx";
+import {Comments} from "../components/Comments.jsx";
 
 export const ViewArticle = () => {
     const {article_id} = useParams();
@@ -20,8 +21,10 @@ export const ViewArticle = () => {
     return (
         <div>
             {loading && <h1 className="text-l font-bold mb-4">Loading Article...</h1>}
-            {!loading &&
-             <Article article={article}/>
+            {!loading && <>
+                <Article article={article}/>
+                <Comments article_id={article.article_id}/>
+            </>
             }
         </div>
     );
