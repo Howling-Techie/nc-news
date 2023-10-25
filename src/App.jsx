@@ -4,6 +4,7 @@ import {LatestArticles} from "../pages/LatestArticles.jsx";
 import {TopicArticles} from "../pages/TopicArticles.jsx";
 import {Home} from "../pages/Home.jsx";
 import {ViewArticle} from "../pages/ViewArticle.jsx";
+import {UserSignIn} from "../pages/UserSignIn.jsx";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
                     <Route path="/latest" element={<LatestArticles/>}/>
                     <Route path="/topics/:topic_name" element={<TopicArticles/>}/>
                     <Route path="/articles/:article_id" element={<ViewArticle/>}/>
+                    <Route path="/signin" element={<UserSignIn/>}/>
                 </Routes>
             </div>
         </>
