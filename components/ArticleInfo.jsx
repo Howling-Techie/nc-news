@@ -9,11 +9,11 @@ export const ArticleInfo = ({article}) => {
     };
 
     return (
-        <section className="flex mb-4">
-            <figure className="w-1/4 pr-4">
-                <img src={article_img_url} alt={title} className="w-full h-auto rounded-md"/>
+        <section className="flex mb-4 border rounded-xl flex-col sm:flex-row">
+            <figure className="sm:w-1/4 sm:pr-4">
+                <img src={article_img_url} alt={title} className="h-full rounded-md object-cover"/>
             </figure>
-            <summary className="w-3/4 flex flex-col justify-center">
+            <summary className="sm:w-3/4 p-2 sm:p-0 flex flex-col justify-center">
                 <Link to={`/articles/${article_id}`} className="text-2xl font-bold hover:underline">{title}</Link>
                 <div className="text-sm hidden md:block py-1">
                     <Link to={`/topics/${topic}`} className="text-gray-700 hover:underline">
