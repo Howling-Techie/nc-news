@@ -28,8 +28,8 @@ const getUserById = (userId) => {
         .then(handleResponse);
 };
 
-const getArticles = (limit = 10) => {
-    return fetch(`${BASE_URL}/articles?limit=${limit}`, {headers})
+const getArticles = (limit = 10, sort = "created_at", order = "desc", offset = 0) => {
+    return fetch(`${BASE_URL}/articles?limit=${limit}&sort_by=${sort}&order=${order}&offset=${offset}`, {headers})
         .then(handleResponse);
 };
 
