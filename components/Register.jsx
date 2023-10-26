@@ -1,6 +1,9 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {UserContext} from "../contexts/UserContext.jsx";
 
-export const Register = ({toggleForm}) => {
+export const Register = ({toggleForm, showPopup}) => {
+    const {register} = useContext(UserContext);
+
     const [formData, setFormData] = useState({
         username: "",
         displayName: "",
@@ -37,11 +40,10 @@ export const Register = ({toggleForm}) => {
                 isValid = /^\S{6,20}$/i.test(value);
                 break;
         }
-        console.log(`Setting ${name} [${value}] to ${isValid}`);
         setValidFields({...validFields, [name]: isValid});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const isPasswordValid = /^\S{6,20}$/i.test(formData.password);
@@ -55,13 +57,19 @@ export const Register = ({toggleForm}) => {
         });
         if (isPasswordValid && isUsernameValid && isDisplayNameValid) {
             setPasswordsMatch(true);
-            //handleRegister(formData);
+            showPopup("Please wait", "Registering...", "info", false);
+            const response = await register(formData.username, formData.displayName, formData.password);
+            if (response.success) {
+                showPopup("Success", "Signing in...", "success", false);
+            } else {
+                showPopup("Error", response.message, "error");
+            }
         }
     };
 
     return (
         <div className="max-w-md mx-auto p-6 border rounded shadow-md h-full flex flex-col">
-            <h2 className="text-2xl font-bold mb-4">Register</h2>
+            <h1 className="text-2xl font-bold mb-4">Register</h1>
             <form onSubmit={handleSubmit} className="flex flex-grow flex-col justify-between">
                 <section>
                     <div className="mb-4">

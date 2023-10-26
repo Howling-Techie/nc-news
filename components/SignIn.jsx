@@ -1,21 +1,29 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {UserContext} from "../contexts/UserContext.jsx";
 
-export const SignIn = ({toggleForm}) => {
+export const SignIn = ({toggleForm, showPopup}) => {
     const [formData, setFormData] = useState({username: "", password: ""});
-
+    const {signIn} = useContext(UserContext);
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData({...formData, [name]: value});
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        //handleSignIn(formData);
+        showPopup("Please wait", "Signing in...", "info", false);
+        const response = await signIn(formData.username, formData.password);
+        if (response.success) {
+            showPopup("Success", "Signing in...", "success", false);
+        } else {
+            console.log(response);
+            showPopup("Error", response.message, "error");
+        }
     };
 
     return (
         <div className="max-w-md mx-auto p-6 border rounded shadow-md h-full flex flex-col">
-            <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+            <h1 className="text-2xl font-bold mb-4">Sign In</h1>
             <form onSubmit={handleSubmit} className="flex flex-grow flex-col justify-between">
                 <section>
                     <div className="mb-4">
@@ -43,7 +51,6 @@ export const SignIn = ({toggleForm}) => {
                             value={formData.password}
                             onChange={handleChange}
                             className="w-full p-2 border rounded focus:outline-blue-400 focus:outline-offset-1"
-                            required
                         />
                     </div>
                 </section>
