@@ -21,7 +21,7 @@ export const SignIn = ({toggleForm, showPopup}) => {
     };
 
     return (
-        <div className="max-w-md mx-auto p-6 border rounded shadow-md h-full flex flex-col">
+        <article className="max-w-md mx-auto p-6 border rounded shadow-md h-full flex flex-col">
             <h1 className="text-2xl font-bold mb-4">Sign In</h1>
             <form onSubmit={handleSubmit} className="flex flex-grow flex-col justify-between">
                 <section>
@@ -67,6 +67,6 @@ export const SignIn = ({toggleForm, showPopup}) => {
                     </div>
                 </section>
             </form>
-        </div>
+        </article>
     );
 };

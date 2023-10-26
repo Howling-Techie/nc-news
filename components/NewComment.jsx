@@ -26,7 +26,7 @@ export const NewComment = ({article_id, addComment, showPopup}) => {
     };
 
     return (
-        <div className="bg-white p-4 mb-4 border rounded-xl shadow">
+        <article className="bg-white p-4 mb-4 border rounded-xl shadow">
             <h2 className="text-xl font-bold mb-4">Post a Comment</h2>
             {user && <p>
                 Posting as <strong className="font-bold">{user.name}</strong>
@@ -43,7 +43,7 @@ export const NewComment = ({article_id, addComment, showPopup}) => {
                 placeholder="Write your comment here..."
                 disabled={!user}
             />
-            <div className="flex justify-end">
+            <section className="flex justify-end">
                 <button
                     className={`w-52 bg-blue-500 text-white px-4 py-2 rounded
                     ${!(postingComment || !user) && "hover:bg-blue-600"}
@@ -53,7 +53,7 @@ export const NewComment = ({article_id, addComment, showPopup}) => {
                 >
                     {!user ? "Please Sign In" : postingComment ? "Posting..." : "Post Comment"}
                 </button>
-            </div>
-        </div>
+            </section>
+        </article>
     );
 };
