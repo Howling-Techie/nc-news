@@ -55,7 +55,9 @@ const postTopic = (topicData) => {
         headers,
         body: JSON.stringify(topicData),
     })
-        .then(handleResponse);
+        .then((response) => {
+            return response.json();
+        });
 };
 
 const postArticle = (articleData) => {
@@ -67,11 +69,11 @@ const postArticle = (articleData) => {
         .then(handleResponse);
 };
 
-const postCommentByArticleId = (articleId, commentData) => {
+const postCommentByArticleId = (articleId, accessToken, comment) => {
     return fetch(`${BASE_URL}/articles/${articleId}/comments`, {
         method: "POST",
         headers,
-        body: JSON.stringify(commentData),
+        body: JSON.stringify({token: accessToken, body: comment}),
     })
         .then(handleResponse);
 };
