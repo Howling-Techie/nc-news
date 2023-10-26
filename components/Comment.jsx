@@ -20,14 +20,14 @@ export const Comment = ({comment}) => {
     return (
         <article className="flex p-4 border rounded-xl mb-4">
             <figure className="flex-shrink-0 mr-4">
-                <img
+                {!loading && <img
                     src={user.avatar_url}
                     alt={user.name}
                     className="w-12 h-12"
-                />
+                />}
             </figure>
             <section className="flex-1">
-                {loading && <strong className="font-bold">Loading User Info...</strong>}
+                {loading && <strong className="font-bold">Loading User Info for @${author}</strong>}
                 {!loading && (
                     <>
                         <strong className="font-bold">{user.name}</strong>

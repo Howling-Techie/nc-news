@@ -6,6 +6,9 @@ const headers = {
 
 // Helper function for handling response
 const handleResponse = (response) => {
+    if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+    }
     return response.json();
 };
 
@@ -52,7 +55,9 @@ const postTopic = (topicData) => {
         headers,
         body: JSON.stringify(topicData),
     })
-        .then(handleResponse);
+        .then((response) => {
+            return response.json();
+        });
 };
 
 const postArticle = (articleData) => {
