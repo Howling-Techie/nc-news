@@ -1,12 +1,9 @@
 import {useEffect, useState} from "react";
 import {ArticleInfo} from "../components/ArticleInfo.jsx";
-import {useParams, useSearchParams} from "react-router-dom";
-import {getArticlesByTopic, getTopics} from "../services/API.js";
+import {getArticles} from "../services/API.js";
+import {useSearchParams} from "react-router-dom";
 
-export const TopicArticles = () => {
-    const {topic_name} = useParams();
-
-    const [topic, setTopic] = useState({});
+export const AllArticles = () => {
     const [articles, setArticles] = useState([]);
     const [sortParams, setSortParams] = useSearchParams({});
     const [sorting, setSorting] = useState({});
@@ -26,22 +23,18 @@ export const TopicArticles = () => {
         if (!sorting.sort_by) {
             return;
         }
-        getArticlesByTopic(topic_name, 10, sorting.sort_by, sorting.order, sorting.offset)
+        getArticles(10, sorting.sort_by, sorting.order, sorting.offset)
             .then(data => {
                 const sortedArticles = data.articles;
                 setArticles(sortedArticles);
             })
             .then(() => {
-                return getTopics();
-            })
-            .then((topicData) => {
-                setTopic(topicData.topics.find((topic) => topic.slug === topic_name));
                 setLoading(false);
             })
             .catch(error => console.error("Error fetching articles:", error));
         document.getElementById("sorting").value = sorting.sort_by + "-" + sorting.order;
 
-    }, [topic_name, sorting]);
+    }, [sorting]);
 
     const handleSortChange = (e) => {
         console.log(`DROP DOWN CHANGED TO ${e.target.value}`);
@@ -50,12 +43,9 @@ export const TopicArticles = () => {
     };
 
     return (
-        <>
-            <section className="flex justify-between items-center">
-                <div>
-                    <h1 className="text-2xl font-bold mb-2">Latest {"\"" + topic_name + "\""} articles</h1>
-                    <h2 className="text-l mb-4">{topic.description}</h2>
-                </div>
+        <div>
+            <section className="flex justify-between items-center mb-4">
+                <h1 className="text-2xl font-bold mb-2">All articles</h1>
                 <select
                     id="sorting"
                     onChange={handleSortChange}
@@ -69,10 +59,10 @@ export const TopicArticles = () => {
                     <option value="comment_count-asc">Sort by Comments (Lowest First)</option>
                 </select>
             </section>
-            {loading && <h2 className="text-l font-bold mb-4">Loading Topic...</h2>}
+            {loading && <h3 className="text-l font-bold mb-4">Loading Articles...</h3>}
             {!loading && articles.map(article => (
                 <ArticleInfo key={article.article_id} article={article}/>
             ))}
-        </>
+        </div>
     );
 };

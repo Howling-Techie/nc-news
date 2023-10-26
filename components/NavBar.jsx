@@ -21,8 +21,8 @@ export const NavBar = () => {
                 <Link to="/" className="text-black hover:bg-gray-200 p-2 rounded">
                     Home
                 </Link>
-                <Link to="/latest" className="text-black hover:bg-gray-200 p-2 rounded">
-                    Latest
+                <Link to="/all" className="text-black hover:bg-gray-200 p-2 rounded">
+                    Articles
                 </Link>
                 <div className="rounded hover:cursor-pointer"
                      onMouseEnter={() => setIsOpen(true)}
