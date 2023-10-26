@@ -28,22 +28,23 @@ export const NewComment = ({article_id, addComment, showPopup}) => {
     return (
         <article className="bg-white p-4 mb-4 border rounded-xl shadow">
             <h2 className="text-xl font-bold mb-4">Post a Comment</h2>
-            {user && <p>
+            {user && <p className="ml-1 mb-1">
                 Posting as <strong className="font-bold">{user.name}</strong>
                 <span className="text-gray-500 font-normal italic mb-0">{` (@${user.username})`}</span>
             </p>}
-            {!user && <p>
+            {!user && <p className="ml-1 mb-1">
                 Please sign in to post a comment
             </p>}
             <textarea
-                className={`w-full h-24 p-2 border rounded mb-4 ${(postingComment || !user) && "bg-gray-100 cursor-not-allowed"}`}
+                className={`w-full h-24 p-2 border rounded ${(postingComment || !user) && "bg-gray-100 cursor-not-allowed"}`}
                 value={comment}
                 onChange={handleCommentChange}
                 maxLength={500}
                 placeholder="Write your comment here..."
                 disabled={!user}
             />
-            <section className="flex justify-end">
+            {user && <p className="text-gray-500 text-right">{comment.length}/500</p>}
+            <section className="flex justify-end mt-4">
                 <button
                     className={`w-52 bg-blue-500 text-white px-4 py-2 rounded
                     ${!(postingComment || !user) && "hover:bg-blue-600"}

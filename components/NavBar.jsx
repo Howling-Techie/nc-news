@@ -20,8 +20,8 @@ export const NavBar = () => {
             <div className="flex justify-start">
                 <Link to="/" className="text-2xl font-bold">Northcoders News</Link>
             </div>
-            <div className="flex space-x-4 justify-start flex-grow ml-12">
-                <Link to="/" className="text-black hover:bg-gray-200 p-2 rounded">
+            <div className="flex justify-start flex-grow collapse md:visible">
+                <Link to="/" className="ml-8 text-black hover:bg-gray-200 p-2 rounded">
                     Home
                 </Link>
                 <Link to="/all" className="text-black hover:bg-gray-200 p-2 rounded">
@@ -51,34 +51,34 @@ export const NavBar = () => {
                     Submit
                 </Link>
             </div>
-            <div className="flex flex-grow justify-end">
+            <div className="flex justify-end">
                 {user &&
-                 <div className="rounded hover:cursor-pointer"
-                      onMouseEnter={() => setIsProfileOpen(true)}
-                      onMouseLeave={() => setIsProfileOpen(false)}>
-                     <div className="text-black hover:bg-gray-200 p-2 rounded">
-                         {user.name}
-                     </div>
-                     {isProfileOpen && (
-                         <div className="absolute bg-white border border-gray-300 py-2 rounded shadow-lg z-10">
-                             <Link
-                                 to={`/profile`}
-                                 key="profile"
-                                 className="block px-4 py-2 hover:bg-gray-200"
-                             >
-                                 Profile
-                             </Link>
-                             <Link
-                                 to={`/signout`}
-                                 key="signout"
-                                 className="block px-4 py-2 hover:bg-gray-200"
-                                 onClick={() => setIsProfileOpen(false)}
-                             >
-                                 Sign Out
-                             </Link>
-                         </div>
-                     )}
-                 </div>}
+                    <div className="rounded hover:cursor-pointer"
+                         onMouseEnter={() => setIsProfileOpen(true)}
+                         onMouseLeave={() => setIsProfileOpen(false)}>
+                        <div className="text-black hover:bg-gray-200 p-2 rounded">
+                            {user.name}
+                        </div>
+                        {isProfileOpen && (
+                            <div className="absolute bg-white border border-gray-300 py-2 rounded shadow-lg z-10">
+                                <Link
+                                    to={`/profile`}
+                                    key="profile"
+                                    className="block px-4 py-2 hover:bg-gray-200"
+                                >
+                                    Profile
+                                </Link>
+                                <Link
+                                    to={`/signout`}
+                                    key="signout"
+                                    className="block px-4 py-2 hover:bg-gray-200"
+                                    onClick={() => setIsProfileOpen(false)}
+                                >
+                                    Sign Out
+                                </Link>
+                            </div>
+                        )}
+                    </div>}
                 {!user && <Link to="/signin" className="text-black hover:bg-gray-200 p-2 rounded">Sign In</Link>}
             </div>
         </nav>

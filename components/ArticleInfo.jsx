@@ -11,7 +11,9 @@ export const ArticleInfo = ({article}) => {
     return (
         <section className="flex mb-4 border rounded-xl flex-col sm:flex-row">
             <figure className="sm:w-1/4 sm:pr-4">
-                <img src={article_img_url} alt={title} className="h-full rounded-md object-cover"/>
+                <Link to={`/articles/${article_id}`}>
+                    <img src={article_img_url} alt={title} className="h-full rounded-md object-cover"/>
+                </Link>
             </figure>
             <summary className="sm:w-3/4 p-2 sm:p-0 flex flex-col justify-center">
                 <Link to={`/articles/${article_id}`} className="text-2xl font-bold hover:underline">{title}</Link>
@@ -23,7 +25,7 @@ export const ArticleInfo = ({article}) => {
                 <div className="text-gray-700 text-sm mb-2">
                     {formatDate(created_at)} - {author}
                 </div>
-                <div className="text-sm font-bold hidden md:block">
+                <div className="text-sm font-bold sm:hidden md:block">
                     <span role="img" aria-label="votes"> 👍 {votes} votes</span> |
                     <span role="img" aria-label="comments"> 💬 {comment_count} comments</span>
                 </div>

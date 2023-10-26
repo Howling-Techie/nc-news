@@ -5,13 +5,13 @@ export const Article = (article) => {
     const {author, title, topic, created_at, votes, article_img_url, comment_count, body} = article.article;
 
     return (
-        <article className="flex flex-col p-4 mb-4 border rounded-xl">
-            <section className="flex flex-col md:flex-row md:mb-4 border rounded-md">
+        <article className="flex flex-col md:p-4 mb-4 border rounded-xl">
+            <section className="flex flex-col md:flex-row md:mb-4 md:border rounded-md">
                 <figure className="w-full md:w-1/3 ">
                     <img src={article_img_url} alt={title} className="h-full rounded-md object-cover"/>
                 </figure>
                 <section className="px-4 flex flex-col justify-center ">
-                    <Link to={`/topics/${topic}`} className=" hover:underline">
+                    <Link to={`/topics/${topic}`} className="ml-1 pt-1 hover:underline">
                         {topic}
                     </Link>
                     <h1 className="text-2xl font-bold">{title}</h1>
@@ -27,7 +27,7 @@ export const Article = (article) => {
                     </summary>
                 </section>
             </section>
-            <section className="pb-4">
+            <section className="px-2 pt-2 md:pt-0 pb-4">
                 {body}
             </section>
             <section className="text-sm pb-4">

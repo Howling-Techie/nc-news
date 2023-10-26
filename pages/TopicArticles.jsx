@@ -51,7 +51,7 @@ export const TopicArticles = () => {
 
     return (
         <>
-            <section className="flex justify-between items-center">
+            <section className="flex justify-between items-center flex-col sm:flex-row">
                 <div>
                     <h1 className="text-2xl font-bold mb-2">Latest {"\"" + topic_name + "\""} articles</h1>
                     <h2 className="text-l mb-4">{topic.description}</h2>
@@ -59,7 +59,7 @@ export const TopicArticles = () => {
                 <select
                     id="sorting"
                     onChange={handleSortChange}
-                    className="p-2 border rounded"
+                    className="p-2 border rounded mb-4"
                 >
                     <option value="created_at-desc">Sort by Date (Newest First)</option>
                     <option value="created_at-asc">Sort by Date (Oldest First)</option>
