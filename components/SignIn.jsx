@@ -16,7 +16,6 @@ export const SignIn = ({toggleForm, showPopup}) => {
         if (response.success) {
             showPopup("Success", "Signing in...", "success", false);
         } else {
-            console.log(response);
             showPopup("Error", response.message, "error");
         }
     };
@@ -26,6 +25,9 @@ export const SignIn = ({toggleForm, showPopup}) => {
             <h1 className="text-2xl font-bold mb-4">Sign In</h1>
             <form onSubmit={handleSubmit} className="flex flex-grow flex-col justify-between">
                 <section>
+                    <p className="italic">Developer note: if you don't want to register, sign in with "securedUser",
+                        password
+                        "hunter2".</p>
                     <div className="mb-4">
                         <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
                             Username

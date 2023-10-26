@@ -6,9 +6,6 @@ const headers = {
 
 // Helper function for handling response
 const handleResponse = (response) => {
-    if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-    }
     return response.json();
 };
 
@@ -67,11 +64,11 @@ const postArticle = (articleData) => {
         .then(handleResponse);
 };
 
-const postCommentByArticleId = (articleId, commentData) => {
+const postCommentByArticleId = (articleId, accessToken, comment) => {
     return fetch(`${BASE_URL}/articles/${articleId}/comments`, {
         method: "POST",
         headers,
-        body: JSON.stringify(commentData),
+        body: JSON.stringify({token: accessToken, body: comment}),
     })
         .then(handleResponse);
 };
