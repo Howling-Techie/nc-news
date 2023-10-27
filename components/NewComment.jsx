@@ -22,6 +22,7 @@ export const NewComment = ({article_id, addComment, showPopup}) => {
         } else {
             showPopup("Error", response.message, "error");
         }
+        setComment("");
         setPostingComment(false);
     };
 

@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState} from "react";
-import {registerUser, signUserIn} from "../services/UserManager.js";
+import {refreshAccessToken, registerUser, signUserIn} from "../services/UserManager.js";
 
 const UserContext = createContext();
 
@@ -21,10 +21,16 @@ const UserProvider = ({children}) => {
     }, []);
 
     useEffect(() => {
+        const refreshTokens = async () => {
+            const tokens = await refreshAccessToken(accessToken, refreshToken);
+            setAccessToken(tokens.accessToken);
+            setRefreshToken(tokens.refreshToken);
+        };
         if (user && accessToken && refreshToken) {
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("refreshToken", refreshToken);
+            refreshTokens();
         }
     }, [user, accessToken, refreshToken]);
 

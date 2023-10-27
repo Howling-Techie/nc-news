@@ -33,17 +33,33 @@ const getArticles = (limit = 10, sort = "created_at", order = "desc", offset = 0
         .then(handleResponse);
 };
 
-const getArticleById = (articleId) => {
+const getArticleById = (articleId, token) => {
+    if (token) {
+        headers.authorization = token;
+    }
     return fetch(`${BASE_URL}/articles/${articleId}`, {headers})
         .then(handleResponse);
 };
 
+const patchArticleVote = (articleId, vote, token) => {
+    return fetch(`${BASE_URL}/articles/${articleId}/votes`, {
+        method: "PATCH",
+        headers,
+        body: JSON.stringify({vote: vote, token: token})
+    })
+        .then((response) => {
+            return response.json();
+        });
+};
 const getArticlesByTopic = (topic, limit = 10, sort = "created_at", order = "desc", offset = 0) => {
     return fetch(`${BASE_URL}/articles?topic=${topic}&limit=${limit}&sort_by=${sort}&order=${order}&offset=${offset}`, {headers})
         .then(handleResponse);
 };
 
-const getCommentsByArticleId = (articleId) => {
+const getCommentsByArticleId = (articleId, token) => {
+    if (token) {
+        headers.authorization = token;
+    }
     return fetch(`${BASE_URL}/articles/${articleId}/comments`, {headers})
         .then(handleResponse);
 };
@@ -78,12 +94,14 @@ const postCommentByArticleId = (articleId, accessToken, comment) => {
         .then(handleResponse);
 };
 
+
 export {
     getTopics,
     getUsers,
     getUserById,
     getArticles,
     getArticleById,
+    patchArticleVote,
     getArticlesByTopic,
     getCommentsByArticleId,
     postTopic,
