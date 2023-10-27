@@ -1,14 +1,17 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {getArticleById} from "../services/API.js";
 import {Article} from "../components/Article.jsx";
 import {Comments} from "../components/Comments.jsx";
 import {Popup} from "../components/Popup.jsx";
+import {UserContext} from "../contexts/UserContext.jsx";
 
 export const ViewArticle = () => {
     const {article_id} = useParams();
     const [article, setArticle] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const {accessToken} = useContext(UserContext);
 
     const [isPopupShown, setIsPopupShown] = useState(false);
     const [popupInfo, setPopupInfo] = useState({
@@ -18,13 +21,13 @@ export const ViewArticle = () => {
     });
 
     useEffect(() => {
-        getArticleById(article_id)
+        getArticleById(article_id, accessToken)
             .then(data => {
                 setArticle(data.article);
                 setLoading(false);
             })
             .catch(error => console.error("Error fetching article:", error));
-    }, [article_id]);
+    }, [accessToken, article_id]);
 
     const showPopup = (title, message, type) => {
         setPopupInfo({title, message, type});

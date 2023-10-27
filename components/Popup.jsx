@@ -1,4 +1,4 @@
-export const Popup = ({title, message, onClose, type, showButton = true}) => {
+export const Popup = ({title, message, type, showButton = true, onClose}) => {
     let icon = "";
     if (type === "error") {
         icon = "❌";
