@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {formatDate} from "../Utils/Utils.jsx";
 
 export const Comment = ({comment}) => {
-    const {body, comment_id, created_at, author, votes} = comment;
+    const {body, comment_id, created_at, author, votes, user_vote = 0} = comment;
 
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
@@ -41,16 +41,16 @@ export const Comment = ({comment}) => {
                 <div className="inline-flex items-center" aria-label="comment votes">
                     <button
                         aria-label="vote comment down"
-                        className="border-gray-600 border hover:bg-gray-600 hover:border-gray-600 text-red-500 hover:text-gray-50 font-bold py-1 px-2 rounded-l"
+                        className="border-gray-500 border hover:bg-gray-500 text-red-500 hover:text-gray-50 font-bold py-1 px-2 rounded-l"
                     >
                         -1
                     </button>
-                    <div className="border-gray-600 border-t border-b text-gray-800 font-semibold py-1 px-6">
+                    <div className="border-gray-500 border-t border-b py-1 px-6">
                         {votes}
                     </div>
                     <button
                         aria-label="vote comment up"
-                        className="border-gray-600 border hover:bg-gray-600 hover:border-gray-600 font-bold py-1 px-2 rounded-r text-green-500 hover:text-gray-50"
+                        className="border-gray-500 border hover:bg-gray-500 font-bold py-1 px-2 rounded-r text-green-500 hover:text-gray-50"
                     >
                         +1
                     </button>

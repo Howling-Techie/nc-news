@@ -1,20 +1,22 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {getCommentsByArticleId} from "../services/API.js";
 import {Comment} from "./Comment.jsx";
 import {NewComment} from "./NewComment.jsx";
+import {UserContext} from "../contexts/UserContext.jsx";
 
 export const Comments = ({article_id, showPopup}) => {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {accessToken} = useContext(UserContext);
 
     useEffect(() => {
-        getCommentsByArticleId(article_id)
+        getCommentsByArticleId(article_id, accessToken)
             .then(data => {
                 setComments(data.comments);
                 setLoading(false);
             })
             .catch(error => console.error("Error fetching article:", error));
-    }, [article_id]);
+    }, [article_id, accessToken]);
 
     const addComment = (newComment) => {
         setComments(currentComments => [newComment, ...currentComments]);
