@@ -28,8 +28,8 @@ const registerUser = (username, displayName, password) => {
     })
         .then(handleResponse);
 };
-const refreshToken = (token) => {
-    return fetch(`${BASE_URL}/refresh`, {method: "POST", headers, body: JSON.stringify({token})})
+const refreshAccessToken = (accessToken, refreshToken) => {
+    return fetch(`${BASE_URL}/refresh`, {method: "POST", headers, body: JSON.stringify({accessToken, refreshToken})})
         .then(handleResponse);
 };
 
@@ -37,5 +37,5 @@ export {
     getCurrentUser,
     signUserIn,
     registerUser,
-    refreshToken
+    refreshAccessToken
 };

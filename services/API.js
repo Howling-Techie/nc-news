@@ -94,6 +94,7 @@ const postCommentByArticleId = (articleId, accessToken, comment) => {
         .then(handleResponse);
 };
 
+
 export {
     getTopics,
     getUsers,
