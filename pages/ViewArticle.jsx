@@ -43,7 +43,7 @@ export const ViewArticle = () => {
         <div>
             {loading && <h1 className="text-l font-bold mb-4">Loading Article...</h1>}
             {!loading && <>
-                <Article article={article}/>
+                <Article article={article} showPopup={showPopup}/>
                 <Comments article_id={article.article_id} showPopup={showPopup}/>
             </>
             }

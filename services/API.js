@@ -47,7 +47,9 @@ const patchArticleVote = (articleId, vote, token) => {
         headers,
         body: JSON.stringify({vote: vote, token: token})
     })
-        .then(handleResponse);
+        .then((response) => {
+            return response.json();
+        });
 };
 const getArticlesByTopic = (topic, limit = 10, sort = "created_at", order = "desc", offset = 0) => {
     return fetch(`${BASE_URL}/articles?topic=${topic}&limit=${limit}&sort_by=${sort}&order=${order}&offset=${offset}`, {headers})

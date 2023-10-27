@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {formatDate} from "../Utils/Utils.jsx";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {patchArticleVote} from "../services/API.js";
 import {UserContext} from "../contexts/UserContext.jsx";
 
@@ -18,22 +18,28 @@ export const Article = ({article, showPopup}) => {
         user_vote
     } = article;
     const {user, accessToken} = useContext(UserContext);
-    const [currentVote, setCurrentVote] = useState(user_vote);
+    const [currentVote, setCurrentVote] = useState(0);
     const [totalVotes, setTotalVotes] = useState(votes);
     const handleVote = async (newVote) => {
         const oldVote = totalVotes;
         const oldUserVote = currentVote;
         setCurrentVote(newVote);
-        setTotalVotes(currentTotal => currentTotal - oldUserVote + newVote);
+        setTotalVotes(currentTotal => currentTotal - currentVote + newVote);
         const response = await patchArticleVote(article_id, newVote, accessToken);
+        console.log(response);
         if (response.article) {
             setTotalVotes(() => response.article.votes);
         } else {
-            setCurrentVote(() => 0);
+            setCurrentVote(() => oldUserVote);
             setTotalVotes(() => oldVote);
             showPopup("Error", "Sorry, failed to submit your vote at this time, please try again later", "error");
         }
     };
+
+    useEffect(() => {
+        setCurrentVote(user_vote);
+    }, [user_vote]);
+
     return (
         <article className="flex flex-col md:p-4 mb-4 border rounded-xl">
             <section className="flex flex-col md:flex-row md:mb-4 md:border rounded-md">
